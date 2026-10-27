@@ -305,8 +305,8 @@ def fig_weights(df):
     ax.tick_params(length=0)
     for side in ax.spines.values():
         side.set_visible(False)
-    ax.set_xlabel("Source institution (whose update is used)")
-    ax.set_ylabel("Target institution")
+    ax.set_xlabel("Source sub-client (whose update is used)")
+    ax.set_ylabel("Target sub-client")
     cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.03)
     cb.outline.set_visible(False)
     cb.ax.tick_params(labelsize=6.5, length=2)
@@ -350,7 +350,7 @@ def fig_weights(df):
     cx.set_xlabel(r"Blend weight $\beta$")
     plt.setp(bx.get_xticklabels(), visible=False)
     panel(bx, "b", rf"Accuracy vs. $\beta$ ($\alpha = 0.1$, {len(seeds)} seeds)", x=-0.02, y=1.07)
-    panel(cx, "c", "Weight on same-modality institutions", x=-0.02, y=1.07)
+    panel(cx, "c", "Weight on same-modality sub-clients", x=-0.02, y=1.07)
     save(fig, "fig_weights")
     print(f"   same-modality weight share at beta=0.5 (5 seeds): {np.mean([same_modality_share(history(e)[0]['aggregation_weights']) for e in runs]):.3f}")
     for b in bs:

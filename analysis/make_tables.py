@@ -312,25 +312,29 @@ def table_ablation(main, abl, fx):
     write("ablation.tex", lines)
 
 
-def table_tau(main, tau):
+def table_tau(main, tau, fx=None):
     seeds = sorted(tau.seed.unique())
     m3 = main[main.seed.isin(seeds)]
-    rows = [("FlexLoRA (full-rank upload)", m3[m3.method == "flexlora"], "16.0")]
+    rows = []
+    if fx is not None:
+        rows.append((r"FlexLoRA (matched $\eta=10^{-3}$)$^\ast$", fx[fx.seed.isin(seeds)], "16.0"))
+    rows.append((r"FlexLoRA (val-selected $\eta=3\times10^{-4}$)", m3[m3.method == "flexlora"], "16.0"))
     for t, v in [(0.95, m3[m3.method == OURS])] + [(t, tau[tau.tau == t]) for t in sorted(tau.tau.dropna().unique(), reverse=True)]:
         rows.append((f"FedProtoLoRA, $\\tau={t:g}$", v, f"{v.mean_upload_rank.mean():.1f}"))
     lines = [
-        "\\begin{table}[t]", "\\centering", "\\small",
+        r"\begin{table}[t]", r"\centering", r"\small",
         f"\\caption{{Spectral-energy upload rank (component C) in setting S1: energy threshold $\\tau$ vs.\\ accuracy and "
         f"communication (seeds {', '.join(map(str, seeds))}). Mean upload rank: average over clients and adapted layers in the "
-        "final round (maximum 16). Note: FlexLoRA is shown at its validation-selected $\\eta=3\\times10^{-4}$; at matched "
-        "$\\eta=10^{-3}$ without component C (row A+B in Table~\\ref{tab:ablation}), balanced accuracy is 87.1\\% at 112.5\\,MiB.}",
-        "\\label{tab:tau}",
-        "\\begin{tabular}{lccc}", "\\toprule",
-        "Configuration & Bal.\\ acc.\\ (\\%) & Upload rank & Comm.\\ (MiB) \\\\", "\\midrule",
+        r"final round (maximum 16). Primary reference ($^\ast$): FlexLoRA at the matched learning rate $\eta=10^{-3}$ "
+        r"(full-rank upload at 112.5\,MiB), isolating compression mechanics from learning-rate differences; "
+        r"validation-selected FlexLoRA ($\eta=3\times10^{-4}$) is included as a secondary reference.}",
+        r"\label{tab:tau}",
+        r"\begin{tabular}{lccc}", r"\toprule",
+        r"Configuration & Bal.\ acc.\ (\%) & Upload rank & Comm.\ (MiB) \\", r"\midrule",
     ]
     for name, v, rank in rows:
         lines.append(f"{name} & {pm(v.mean_test_balanced_acc)} & {rank} & {v.total_comm_mb.mean():.1f} \\\\")
-    lines += ["\\bottomrule", "\\end{tabular}", "\\end{table}"]
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
     write("tau.tex", lines)
 
 
@@ -518,7 +522,7 @@ def main():
     table_per_client(main_ext)
     s2_raw, s2_adj = table_s2(df[df.suite == "s2"])
     table_ablation(main_df, df[df.suite == "ablations"], fx_matched)
-    table_tau(main_df, df[df.suite == "tau"])
+    table_tau(main_df, df[df.suite == "tau"], fx=fx_matched)
     table_tuned()
     lr_out = table_lr_control(main_df, lrc)
     table_beta(df[df.suite == "s2"], df[df.suite == "beta"])
