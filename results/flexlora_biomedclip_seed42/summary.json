@@ -1,0 +1,155 @@
+{
+  "experiment_name": "flexlora_biomedclip_seed42",
+  "suite": "backbone2",
+  "setting": "S1",
+  "dirichlet_alpha": null,
+  "method": "flexlora",
+  "seed": 42,
+  "backbone": "biomedclip",
+  "rank": 16,
+  "num_rounds": 20,
+  "local_epochs": 1,
+  "clients": [
+    "derm",
+    "oct",
+    "histo",
+    "cxr",
+    "brain"
+  ],
+  "method_config": {
+    "use_domain_similarity": false,
+    "use_adaptive_rank": false,
+    "blend_alpha": 0.0,
+    "personalized_aggregate": false,
+    "rank_candidates": null,
+    "hetlora_ranks": null
+  },
+  "trainable_encoder_params_per_client": 589824,
+  "test_metrics": {
+    "derm": {
+      "accuracy": 0.7803234501347709,
+      "balanced_accuracy": 0.6926255439933252,
+      "macro_f1": 0.6798623545766542,
+      "macro_auroc": 0.9564241121842523,
+      "ece": 0.06008653674083898,
+      "nll": 0.5644823207278682
+    },
+    "oct": {
+      "accuracy": 0.8552244297277409,
+      "balanced_accuracy": 0.8894448978054054,
+      "macro_f1": 0.8289184028852903,
+      "macro_auroc": 0.9800537343798479,
+      "ece": 0.07417654706887497,
+      "nll": 0.5697754844671022
+    },
+    "histo": {
+      "accuracy": 0.8173445894090561,
+      "balanced_accuracy": 0.8159677937439183,
+      "macro_f1": 0.8164884300024617,
+      "macro_auroc": 0.9060572135778325,
+      "ece": 0.1531672406818715,
+      "nll": 0.8547906354534369
+    },
+    "cxr": {
+      "accuracy": 0.9555555555555556,
+      "balanced_accuracy": 0.9655836691831754,
+      "macro_f1": 0.9448289681030266,
+      "macro_auroc": 0.9958775614463302,
+      "ece": 0.009643026053556958,
+      "nll": 0.12593699778600986
+    },
+    "brain": {
+      "accuracy": 0.9696106362773029,
+      "balanced_accuracy": 0.9699504499068002,
+      "macro_f1": 0.9697737005583423,
+      "macro_auroc": 0.9975265770799204,
+      "ece": 0.019788059470547154,
+      "nll": 0.12566873917547713
+    }
+  },
+  "mean_test_accuracy": 0.8756117322208853,
+  "mean_test_balanced_acc": 0.866714470926525,
+  "mean_test_macro_f1": 0.847974371225155,
+  "mean_test_auroc": 0.9671878397336366,
+  "total_comm_bytes": 235929600,
+  "mean_upload_rank_final": null,
+  "client_sizes": {
+    "derm": {
+      "train": 5999,
+      "val": 1483,
+      "test": 1484
+    },
+    "oct": {
+      "train": 6001,
+      "val": 1501,
+      "test": 10872
+    },
+    "histo": {
+      "train": 5794,
+      "val": 812,
+      "test": 1303
+    },
+    "cxr": {
+      "train": 3983,
+      "val": 855,
+      "test": 855
+    },
+    "brain": {
+      "train": 4907,
+      "val": 1053,
+      "test": 1053
+    }
+  },
+  "config": {
+    "experiment_name": "flexlora_biomedclip_seed42",
+    "results_dir": "results",
+    "suite": "backbone2",
+    "seed": 42,
+    "device": "auto",
+    "smoke": false,
+    "method": {
+      "name": "flexlora"
+    },
+    "model": {
+      "backbone": "biomedclip",
+      "r": 16,
+      "lora_alpha": 16.0,
+      "lora_dropout": 0.05
+    },
+    "fl": {
+      "setting": "S1",
+      "num_rounds": 20,
+      "local_epochs": 1,
+      "batch_size": 32,
+      "lr": 0.001,
+      "lr_head": 0.001,
+      "lr_full": 3e-05,
+      "weight_decay": 0.01,
+      "clients": [
+        "derm",
+        "oct",
+        "histo",
+        "cxr",
+        "brain"
+      ],
+      "smoke_samples_per_client": 12,
+      "max_train_samples_per_client": 6000,
+      "max_val_samples_per_client": 1500,
+      "amp": true,
+      "class_weighted_loss": true,
+      "gpu_augment": true,
+      "cache_in_memory": true,
+      "num_workers": 0,
+      "eval_num_workers": 0
+    }
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "amp_bf16": true,
+    "class_weighted_loss": true,
+    "gpu_augment": true
+  }
+}

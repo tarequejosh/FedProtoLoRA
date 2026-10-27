@@ -1,0 +1,255 @@
+{
+  "experiment_name": "s2_a0.1_flexlora_dinov2_small_seed2024",
+  "suite": "s2",
+  "setting": "S2",
+  "dirichlet_alpha": 0.1,
+  "method": "flexlora",
+  "seed": 2024,
+  "backbone": "dinov2_small",
+  "rank": 16,
+  "num_rounds": 20,
+  "local_epochs": 1,
+  "clients": [
+    "derm_0",
+    "derm_1",
+    "derm_2",
+    "oct_0",
+    "oct_1",
+    "oct_2",
+    "cxr_0",
+    "cxr_1",
+    "cxr_2",
+    "brain_0",
+    "brain_1",
+    "brain_2"
+  ],
+  "method_config": {
+    "use_domain_similarity": false,
+    "use_adaptive_rank": false,
+    "blend_alpha": 0.0,
+    "personalized_aggregate": false,
+    "rank_candidates": null,
+    "hetlora_ranks": null
+  },
+  "trainable_encoder_params_per_client": 294912,
+  "test_metrics": {
+    "derm_0": {
+      "accuracy": 0.8441558441558441,
+      "balanced_accuracy": 0.789867917226771,
+      "macro_f1": 0.7603628880293026,
+      "macro_auroc": NaN,
+      "ece": 0.0446612676242729,
+      "nll": 0.38774753803740986
+    },
+    "derm_1": {
+      "accuracy": 0.8183716075156576,
+      "balanced_accuracy": 0.8351095670498655,
+      "macro_f1": 0.795083315365901,
+      "macro_auroc": NaN,
+      "ece": 0.05552195202333693,
+      "nll": 0.5239487603454464
+    },
+    "derm_2": {
+      "accuracy": 0.5,
+      "balanced_accuracy": 0.5,
+      "macro_f1": 0.3333333333333333,
+      "macro_auroc": NaN,
+      "ece": 0.608852930366993,
+      "nll": 1.144068789663228
+    },
+    "oct_0": {
+      "accuracy": 0.8844884488448845,
+      "balanced_accuracy": 0.8071473239034832,
+      "macro_f1": 0.677671598120413,
+      "macro_auroc": 0.9717183405075924,
+      "ece": 0.06346054713347885,
+      "nll": 0.3435296561154042
+    },
+    "oct_1": {
+      "accuracy": 0.9307650372524078,
+      "balanced_accuracy": 0.8851021743274068,
+      "macro_f1": 0.8744764150618712,
+      "macro_auroc": 0.9837548259278523,
+      "ece": 0.010173999849458406,
+      "nll": 0.22522588738640126
+    },
+    "oct_2": {
+      "accuracy": 0.908256880733945,
+      "balanced_accuracy": 0.4857142857142857,
+      "macro_f1": 0.535315201349357,
+      "macro_auroc": NaN,
+      "ece": 0.042815091959927054,
+      "nll": 0.20125347586188808
+    },
+    "cxr_0": {
+      "accuracy": 0.9869565217391304,
+      "balanced_accuracy": 0.8549007046764894,
+      "macro_f1": 0.8812596799173981,
+      "macro_auroc": 0.9961563100576553,
+      "ece": 0.023294921802437824,
+      "nll": 0.03351256686920788
+    },
+    "cxr_1": {
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "macro_auroc": NaN,
+      "ece": 0.0,
+      "nll": 1.1920929665620916e-07
+    },
+    "cxr_2": {
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "macro_auroc": NaN,
+      "ece": 3.421306610107422e-05,
+      "nll": 3.421365138136976e-05
+    },
+    "brain_0": {
+      "accuracy": 0.9540636042402827,
+      "balanced_accuracy": 0.9593777009507347,
+      "macro_f1": 0.7463440974435237,
+      "macro_auroc": NaN,
+      "ece": 0.030347569565890974,
+      "nll": 0.13254687603619714
+    },
+    "brain_1": {
+      "accuracy": 0.9854497354497355,
+      "balanced_accuracy": 0.7413287284610814,
+      "macro_f1": 0.7401277230486076,
+      "macro_auroc": 0.9694446518246633,
+      "ece": 0.010898526935350357,
+      "nll": 0.08083978708565427
+    },
+    "brain_2": {
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "macro_auroc": NaN,
+      "ece": 0.0020491480827331543,
+      "nll": 0.002057367598443826
+    }
+  },
+  "mean_test_accuracy": 0.9010423066609906,
+  "mean_test_balanced_acc": 0.8215457001925097,
+  "mean_test_macro_f1": 0.7786645209724755,
+  "mean_test_auroc": 0.9802685320794409,
+  "total_comm_bytes": 283115520,
+  "mean_upload_rank_final": null,
+  "client_sizes": {
+    "derm_0": {
+      "train": 4065,
+      "val": 1002,
+      "test": 1001
+    },
+    "derm_1": {
+      "train": 1919,
+      "val": 478,
+      "test": 479
+    },
+    "derm_2": {
+      "train": 16,
+      "val": 4,
+      "test": 4
+    },
+    "oct_0": {
+      "train": 2803,
+      "val": 705,
+      "test": 5151
+    },
+    "oct_1": {
+      "train": 3085,
+      "val": 773,
+      "test": 5503
+    },
+    "oct_2": {
+      "train": 113,
+      "val": 22,
+      "test": 218
+    },
+    "cxr_0": {
+      "train": 1059,
+      "val": 231,
+      "test": 230
+    },
+    "cxr_1": {
+      "train": 2922,
+      "val": 610,
+      "test": 624
+    },
+    "cxr_2": {
+      "train": 2,
+      "val": 14,
+      "test": 1
+    },
+    "brain_0": {
+      "train": 1329,
+      "val": 287,
+      "test": 283
+    },
+    "brain_1": {
+      "train": 3496,
+      "val": 750,
+      "test": 756
+    },
+    "brain_2": {
+      "train": 82,
+      "val": 16,
+      "test": 14
+    }
+  },
+  "config": {
+    "experiment_name": "s2_a0.1_flexlora_dinov2_small_seed2024",
+    "results_dir": "results",
+    "suite": "s2",
+    "seed": 2024,
+    "device": "auto",
+    "smoke": false,
+    "method": {
+      "name": "flexlora"
+    },
+    "model": {
+      "backbone": "dinov2_small",
+      "r": 16,
+      "lora_alpha": 16.0,
+      "lora_dropout": 0.05
+    },
+    "fl": {
+      "setting": "S2",
+      "num_rounds": 20,
+      "local_epochs": 1,
+      "batch_size": 32,
+      "lr": 0.0003,
+      "lr_head": 0.001,
+      "lr_full": 3e-05,
+      "weight_decay": 0.01,
+      "clients": [
+        "derm",
+        "oct",
+        "cxr",
+        "brain"
+      ],
+      "smoke_samples_per_client": 12,
+      "max_train_samples_per_client": 6000,
+      "max_val_samples_per_client": 1500,
+      "amp": true,
+      "class_weighted_loss": true,
+      "gpu_augment": true,
+      "cache_in_memory": true,
+      "num_workers": 0,
+      "eval_num_workers": 0,
+      "sub_clients_per_modality": 3,
+      "dirichlet_alpha": 0.1
+    },
+    "variant": "flexlora"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "amp_bf16": true,
+    "class_weighted_loss": true,
+    "gpu_augment": true
+  }
+}

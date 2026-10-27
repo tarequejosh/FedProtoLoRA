@@ -1,0 +1,28 @@
+# Fast Smoke Test configuration (Runs on CPU/GPU in seconds)
+experiment_name: "smoke_test"
+seed: 42
+device: "auto"
+smoke: true
+
+method:
+  name: "fedmedlora"
+  use_domain_similarity: true
+  use_adaptive_rank: true
+  adaptive_energy_tau: 0.9
+  similarity_metric: "cosine"
+  blend_alpha: 0.5
+
+model:
+  backbone: "dinov2_small"
+  r: 4
+  lora_alpha: 8.0
+  lora_dropout: 0.0
+
+fl:
+  setting: "S1"
+  num_rounds: 2
+  local_epochs: 1
+  batch_size: 4
+  lr: 0.001
+  clients: ["brain", "cxr"]
+  smoke_samples_per_client: 12

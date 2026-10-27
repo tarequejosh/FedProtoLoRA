@@ -1,0 +1,167 @@
+{
+  "experiment_name": "ablation_A_plus_C_dinov2_small_seed2024",
+  "suite": "ablations",
+  "setting": "S1",
+  "dirichlet_alpha": null,
+  "method": "fedmedlora",
+  "seed": 2024,
+  "backbone": "dinov2_small",
+  "rank": 16,
+  "num_rounds": 20,
+  "local_epochs": 1,
+  "clients": [
+    "derm",
+    "oct",
+    "histo",
+    "cxr",
+    "brain"
+  ],
+  "method_config": {
+    "use_domain_similarity": false,
+    "use_adaptive_rank": true,
+    "blend_alpha": 0.0,
+    "personalized_aggregate": false,
+    "rank_candidates": [
+      4,
+      8,
+      16
+    ],
+    "hetlora_ranks": null
+  },
+  "trainable_encoder_params_per_client": 294912,
+  "test_metrics": {
+    "derm": {
+      "accuracy": 0.7169811320754716,
+      "balanced_accuracy": 0.7546500154105764,
+      "macro_f1": 0.6672287574042758,
+      "macro_auroc": 0.9608961542372041,
+      "ece": 0.09782409736249004,
+      "nll": 0.6991439023532509
+    },
+    "oct": {
+      "accuracy": 0.9088484179543782,
+      "balanced_accuracy": 0.9175863792334202,
+      "macro_f1": 0.8840652043854192,
+      "macro_auroc": 0.989630294220576,
+      "ece": 0.05233738753146946,
+      "nll": 0.3123965644702087
+    },
+    "histo": {
+      "accuracy": 0.8517608517608518,
+      "balanced_accuracy": 0.721683028409936,
+      "macro_f1": 0.7450207155309372,
+      "macro_auroc": 0.8526782025220222,
+      "ece": 0.10253557926509149,
+      "nll": 0.5463338382589942
+    },
+    "cxr": {
+      "accuracy": 0.9321637426900585,
+      "balanced_accuracy": 0.9454078446954646,
+      "macro_f1": 0.9172473867595818,
+      "macro_auroc": 0.9942881875461203,
+      "ece": 0.01964228257798311,
+      "nll": 0.17588423292179098
+    },
+    "brain": {
+      "accuracy": 0.9791073124406457,
+      "balanced_accuracy": 0.9793307353648499,
+      "macro_f1": 0.97928969561355,
+      "macro_auroc": 0.9984466575177873,
+      "ece": 0.015573695004835453,
+      "nll": 0.08463274834349296
+    }
+  },
+  "mean_test_accuracy": 0.8777722913842811,
+  "mean_test_balanced_acc": 0.8637316006228495,
+  "mean_test_macro_f1": 0.8385703519387528,
+  "mean_test_auroc": 0.9591878992087419,
+  "total_comm_bytes": 117307392,
+  "mean_upload_rank_final": {
+    "derm": 16.0,
+    "oct": 16.0,
+    "histo": 16.0,
+    "cxr": 16.0,
+    "brain": 16.0
+  },
+  "client_sizes": {
+    "derm": {
+      "train": 6000,
+      "val": 1484,
+      "test": 1484
+    },
+    "oct": {
+      "train": 6001,
+      "val": 1500,
+      "test": 10872
+    },
+    "histo": {
+      "train": 5509,
+      "val": 1179,
+      "test": 1221
+    },
+    "cxr": {
+      "train": 3983,
+      "val": 855,
+      "test": 855
+    },
+    "brain": {
+      "train": 4907,
+      "val": 1053,
+      "test": 1053
+    }
+  },
+  "config": {
+    "experiment_name": "ablation_A_plus_C_dinov2_small_seed2024",
+    "results_dir": "results",
+    "suite": "ablations",
+    "seed": 2024,
+    "device": "auto",
+    "smoke": false,
+    "method": {
+      "name": "fedmedlora",
+      "use_domain_similarity": false,
+      "use_adaptive_rank": true
+    },
+    "model": {
+      "backbone": "dinov2_small",
+      "r": 16,
+      "lora_alpha": 16.0,
+      "lora_dropout": 0.05
+    },
+    "fl": {
+      "setting": "S1",
+      "num_rounds": 20,
+      "local_epochs": 1,
+      "batch_size": 32,
+      "lr": 0.001,
+      "lr_head": 0.001,
+      "lr_full": 3e-05,
+      "weight_decay": 0.01,
+      "clients": [
+        "derm",
+        "oct",
+        "histo",
+        "cxr",
+        "brain"
+      ],
+      "smoke_samples_per_client": 12,
+      "max_train_samples_per_client": 6000,
+      "max_val_samples_per_client": 1500,
+      "amp": true,
+      "class_weighted_loss": true,
+      "gpu_augment": true,
+      "cache_in_memory": true,
+      "num_workers": 0,
+      "eval_num_workers": 0
+    }
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "amp_bf16": true,
+    "class_weighted_loss": true,
+    "gpu_augment": true
+  }
+}

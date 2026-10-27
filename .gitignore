@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Images and derived caches (downloaded or rebuilt locally; not redistributed)
+data/raw/
+data/cache/
+data/tensor_cache/
+
+# Generated outputs
+outputs/
+reports/
+reports_smoke/
+results_smoke/
+results/_code_snapshot/
+results/_archive_pre_fix/
+results/*.log
+
+# Manuscript (not part of the code release)
+paper/
+
+# Internal notes
+docs/*
+!docs/baselines.md
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,255 @@
+{
+  "experiment_name": "s2_a0.5_local_only_dinov2_small_seed101",
+  "suite": "s2",
+  "setting": "S2",
+  "dirichlet_alpha": 0.5,
+  "method": "local_only",
+  "seed": 101,
+  "backbone": "dinov2_small",
+  "rank": 16,
+  "num_rounds": 20,
+  "local_epochs": 1,
+  "clients": [
+    "derm_0",
+    "derm_1",
+    "derm_2",
+    "oct_0",
+    "oct_1",
+    "oct_2",
+    "cxr_0",
+    "cxr_1",
+    "cxr_2",
+    "brain_0",
+    "brain_1",
+    "brain_2"
+  ],
+  "method_config": {
+    "use_domain_similarity": false,
+    "use_adaptive_rank": false,
+    "blend_alpha": 0.0,
+    "personalized_aggregate": false,
+    "rank_candidates": null,
+    "hetlora_ranks": null
+  },
+  "trainable_encoder_params_per_client": 294912,
+  "test_metrics": {
+    "derm_0": {
+      "accuracy": 0.855036855036855,
+      "balanced_accuracy": 0.6075016195176104,
+      "macro_f1": 0.624198562142225,
+      "macro_auroc": 0.9731176019372035,
+      "ece": 0.10336633418350316,
+      "nll": 0.6606925952134647
+    },
+    "derm_1": {
+      "accuracy": 0.7822014051522248,
+      "balanced_accuracy": 0.4499955934139364,
+      "macro_f1": 0.43888023366666656,
+      "macro_auroc": 0.9381178435016412,
+      "ece": 0.13716319789651965,
+      "nll": 0.8658974837989434
+    },
+    "derm_2": {
+      "accuracy": 0.905829596412556,
+      "balanced_accuracy": 0.44225219225219226,
+      "macro_f1": 0.4072681704260651,
+      "macro_auroc": NaN,
+      "ece": 0.0745933937919514,
+      "nll": 0.5178939963353499
+    },
+    "oct_0": {
+      "accuracy": 0.8733012753501986,
+      "balanced_accuracy": 0.8883007427026414,
+      "macro_f1": 0.8412579327825166,
+      "macro_auroc": 0.9791567385612419,
+      "ece": 0.09397244323827773,
+      "nll": 0.5684032092435144
+    },
+    "oct_1": {
+      "accuracy": 0.9334909843334319,
+      "balanced_accuracy": 0.9200061964795667,
+      "macro_f1": 0.9119888249690566,
+      "macro_auroc": 0.9918468271101656,
+      "ece": 0.0450283531831842,
+      "nll": 0.2687880942258602
+    },
+    "oct_2": {
+      "accuracy": 0.9445676274944568,
+      "balanced_accuracy": 0.7764371778683956,
+      "macro_f1": 0.7798736987756544,
+      "macro_auroc": 0.9700135993940155,
+      "ece": 0.04343842156093738,
+      "nll": 0.2892314972895675
+    },
+    "cxr_0": {
+      "accuracy": 0.9837837837837838,
+      "balanced_accuracy": 0.9821640550807218,
+      "macro_f1": 0.9834821428571429,
+      "macro_auroc": 0.9983974358974359,
+      "ece": 0.007740660615869449,
+      "nll": 0.04509957768415991
+    },
+    "cxr_1": {
+      "accuracy": 0.9366515837104072,
+      "balanced_accuracy": 0.9486899065846435,
+      "macro_f1": 0.8797839686055096,
+      "macro_auroc": 0.9924812030075187,
+      "ece": 0.045154518940869526,
+      "nll": 0.226746072267251
+    },
+    "cxr_2": {
+      "accuracy": 0.9302325581395349,
+      "balanced_accuracy": 0.9605263157894737,
+      "macro_f1": 0.8640674394099052,
+      "macro_auroc": 0.9736842105263158,
+      "ece": 0.06377139063768611,
+      "nll": 0.26480348316850616
+    },
+    "brain_0": {
+      "accuracy": 0.9631901840490797,
+      "balanced_accuracy": 0.9515488523653736,
+      "macro_f1": 0.9542023020701287,
+      "macro_auroc": 0.997295195738473,
+      "ece": 0.027134545010291722,
+      "nll": 0.2509224185003805
+    },
+    "brain_1": {
+      "accuracy": 0.9805013927576601,
+      "balanced_accuracy": 0.9741243604879968,
+      "macro_f1": 0.979661136006885,
+      "macro_auroc": 0.9969403621637191,
+      "ece": 0.023756830141072768,
+      "nll": 0.14063460970830094
+    },
+    "brain_2": {
+      "accuracy": 0.975609756097561,
+      "balanced_accuracy": 0.8739495798319328,
+      "macro_f1": 0.9253732038473182,
+      "macro_auroc": NaN,
+      "ece": 0.024862495282801163,
+      "nll": 0.24370980641570278
+    }
+  },
+  "mean_test_accuracy": 0.922033083526479,
+  "mean_test_balanced_acc": 0.8146247160312071,
+  "mean_test_macro_f1": 0.7991698012965894,
+  "mean_test_auroc": 0.9811051017837731,
+  "total_comm_bytes": 0,
+  "mean_upload_rank_final": null,
+  "client_sizes": {
+    "derm_0": {
+      "train": 1756,
+      "val": 441,
+      "test": 407
+    },
+    "derm_1": {
+      "train": 3345,
+      "val": 813,
+      "test": 854
+    },
+    "derm_2": {
+      "train": 899,
+      "val": 230,
+      "test": 223
+    },
+    "oct_0": {
+      "train": 2961,
+      "val": 800,
+      "test": 4783
+    },
+    "oct_1": {
+      "train": 1688,
+      "val": 347,
+      "test": 3383
+    },
+    "oct_2": {
+      "train": 1351,
+      "val": 352,
+      "test": 2706
+    },
+    "cxr_0": {
+      "train": 1743,
+      "val": 373,
+      "test": 370
+    },
+    "cxr_1": {
+      "train": 2067,
+      "val": 438,
+      "test": 442
+    },
+    "cxr_2": {
+      "train": 174,
+      "val": 43,
+      "test": 43
+    },
+    "brain_0": {
+      "train": 2399,
+      "val": 490,
+      "test": 489
+    },
+    "brain_1": {
+      "train": 1555,
+      "val": 360,
+      "test": 359
+    },
+    "brain_2": {
+      "train": 953,
+      "val": 203,
+      "test": 205
+    }
+  },
+  "config": {
+    "experiment_name": "s2_a0.5_local_only_dinov2_small_seed101",
+    "results_dir": "results",
+    "suite": "s2",
+    "seed": 101,
+    "device": "auto",
+    "smoke": false,
+    "method": {
+      "name": "local_only"
+    },
+    "model": {
+      "backbone": "dinov2_small",
+      "r": 16,
+      "lora_alpha": 16.0,
+      "lora_dropout": 0.05
+    },
+    "fl": {
+      "setting": "S2",
+      "num_rounds": 20,
+      "local_epochs": 1,
+      "batch_size": 32,
+      "lr": 0.0003,
+      "lr_head": 0.001,
+      "lr_full": 3e-05,
+      "weight_decay": 0.01,
+      "clients": [
+        "derm",
+        "oct",
+        "cxr",
+        "brain"
+      ],
+      "smoke_samples_per_client": 12,
+      "max_train_samples_per_client": 6000,
+      "max_val_samples_per_client": 1500,
+      "amp": true,
+      "class_weighted_loss": true,
+      "gpu_augment": true,
+      "cache_in_memory": true,
+      "num_workers": 0,
+      "eval_num_workers": 0,
+      "sub_clients_per_modality": 3,
+      "dirichlet_alpha": 0.5
+    },
+    "variant": "local_only"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "amp_bf16": true,
+    "class_weighted_loss": true,
+    "gpu_augment": true
+  }
+}

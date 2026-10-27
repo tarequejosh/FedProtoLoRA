@@ -1,0 +1,41 @@
+{
+  "centralized": {
+    "lr": 0.0003
+  },
+  "fedavg_full": {
+    "lr_full": 1e-05
+  },
+  "fedavg_lora": {
+    "lr": 0.001
+  },
+  "fedex_lora": {
+    "lr": 0.001
+  },
+  "fedmedlora": {
+    "lr": 0.001
+  },
+  "fedprox_lora": {
+    "lr": 0.0003
+  },
+  "fedsa_lora": {
+    "lr": 0.001
+  },
+  "ffa_lora": {
+    "lr": 0.003
+  },
+  "flexlora": {
+    "lr": 0.0003
+  },
+  "flora": {
+    "lr": 0.001
+  },
+  "hetlora": {
+    "lr": 0.001
+  },
+  "linear_probe": {
+    "lr_head": 0.003
+  },
+  "local_only": {
+    "lr": 0.0003
+  }
+}

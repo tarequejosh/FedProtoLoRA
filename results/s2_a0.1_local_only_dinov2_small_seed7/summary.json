@@ -1,0 +1,255 @@
+{
+  "experiment_name": "s2_a0.1_local_only_dinov2_small_seed7",
+  "suite": "s2",
+  "setting": "S2",
+  "dirichlet_alpha": 0.1,
+  "method": "local_only",
+  "seed": 7,
+  "backbone": "dinov2_small",
+  "rank": 16,
+  "num_rounds": 20,
+  "local_epochs": 1,
+  "clients": [
+    "derm_0",
+    "derm_1",
+    "derm_2",
+    "oct_0",
+    "oct_1",
+    "oct_2",
+    "cxr_0",
+    "cxr_1",
+    "cxr_2",
+    "brain_0",
+    "brain_1",
+    "brain_2"
+  ],
+  "method_config": {
+    "use_domain_similarity": false,
+    "use_adaptive_rank": false,
+    "blend_alpha": 0.0,
+    "personalized_aggregate": false,
+    "rank_candidates": null,
+    "hetlora_ranks": null
+  },
+  "trainable_encoder_params_per_client": 294912,
+  "test_metrics": {
+    "derm_0": {
+      "accuracy": 0.8350694444444444,
+      "balanced_accuracy": 0.7733928338525596,
+      "macro_f1": 0.7824376034238152,
+      "macro_auroc": NaN,
+      "ece": 0.1361361164599657,
+      "nll": 0.786535864816612
+    },
+    "derm_1": {
+      "accuracy": 0.9059945504087193,
+      "balanced_accuracy": 0.7148978406464868,
+      "macro_f1": 0.7097621134173806,
+      "macro_auroc": NaN,
+      "ece": 0.06974047357444871,
+      "nll": 0.4717772396153343
+    },
+    "derm_2": {
+      "accuracy": 0.9367816091954023,
+      "balanced_accuracy": 0.8125472411186697,
+      "macro_f1": 0.8356161436212557,
+      "macro_auroc": NaN,
+      "ece": 0.06023935750983227,
+      "nll": 0.6736921556057315
+    },
+    "oct_0": {
+      "accuracy": 0.7704280155642024,
+      "balanced_accuracy": 0.5661353661353662,
+      "macro_f1": 0.3735195870027331,
+      "macro_auroc": NaN,
+      "ece": 0.1791559695501736,
+      "nll": 0.8796366607443694
+    },
+    "oct_1": {
+      "accuracy": 0.8604724409448818,
+      "balanced_accuracy": 0.8621605958869826,
+      "macro_f1": 0.7851723771080494,
+      "macro_auroc": 0.9707999874999358,
+      "ece": 0.10540107420110323,
+      "nll": 0.6362995226434017
+    },
+    "oct_2": {
+      "accuracy": 0.9603293413173652,
+      "balanced_accuracy": 0.8085838261591541,
+      "macro_f1": 0.851199324662266,
+      "macro_auroc": 0.9780689205515752,
+      "ece": 0.02429994551126595,
+      "nll": 0.19075422331676703
+    },
+    "cxr_0": {
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "macro_auroc": NaN,
+      "ece": 0.0,
+      "nll": 1.1920929665620916e-07
+    },
+    "cxr_1": {
+      "accuracy": 0.9771084337349397,
+      "balanced_accuracy": 0.960690768443933,
+      "macro_f1": 0.9679895098152647,
+      "macro_auroc": 0.9940744470016623,
+      "ece": 0.014518763501960161,
+      "nll": 0.08480257107208038
+    },
+    "cxr_2": {
+      "accuracy": 0.0,
+      "balanced_accuracy": 0.0,
+      "macro_f1": 0.0,
+      "macro_auroc": NaN,
+      "ece": 1.0,
+      "nll": 15.942385152878742
+    },
+    "brain_0": {
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "macro_auroc": NaN,
+      "ece": 7.528066635131836e-05,
+      "nll": 7.546446630938883e-05
+    },
+    "brain_1": {
+      "accuracy": 0.9584120982986768,
+      "balanced_accuracy": 0.82556431183467,
+      "macro_f1": 0.8736952872711162,
+      "macro_auroc": NaN,
+      "ece": 0.037583023253370595,
+      "nll": 0.2666271128648167
+    },
+    "brain_2": {
+      "accuracy": 0.9919678714859438,
+      "balanced_accuracy": 0.6627107989768933,
+      "macro_f1": 0.6619201306108327,
+      "macro_auroc": NaN,
+      "ece": 0.00915035174553652,
+      "nll": 0.07321410580651526
+    }
+  },
+  "mean_test_accuracy": 0.8497136504495479,
+  "mean_test_balanced_acc": 0.748890298587893,
+  "mean_test_macro_f1": 0.7367760064110594,
+  "mean_test_auroc": 0.9809811183510577,
+  "total_comm_bytes": 0,
+  "mean_upload_rank_final": null,
+  "client_sizes": {
+    "derm_0": {
+      "train": 2285,
+      "val": 573,
+      "test": 576
+    },
+    "derm_1": {
+      "train": 3015,
+      "val": 742,
+      "test": 734
+    },
+    "derm_2": {
+      "train": 699,
+      "val": 169,
+      "test": 174
+    },
+    "oct_0": {
+      "train": 220,
+      "val": 53,
+      "test": 514
+    },
+    "oct_1": {
+      "train": 3496,
+      "val": 883,
+      "test": 6350
+    },
+    "oct_2": {
+      "train": 2285,
+      "val": 565,
+      "test": 4008
+    },
+    "cxr_0": {
+      "train": 111,
+      "val": 22,
+      "test": 24
+    },
+    "cxr_1": {
+      "train": 3871,
+      "val": 831,
+      "test": 830
+    },
+    "cxr_2": {
+      "train": 1,
+      "val": 2,
+      "test": 1
+    },
+    "brain_0": {
+      "train": 137,
+      "val": 27,
+      "test": 26
+    },
+    "brain_1": {
+      "train": 2507,
+      "val": 533,
+      "test": 529
+    },
+    "brain_2": {
+      "train": 2263,
+      "val": 493,
+      "test": 498
+    }
+  },
+  "config": {
+    "experiment_name": "s2_a0.1_local_only_dinov2_small_seed7",
+    "results_dir": "results",
+    "suite": "s2",
+    "seed": 7,
+    "device": "auto",
+    "smoke": false,
+    "method": {
+      "name": "local_only"
+    },
+    "model": {
+      "backbone": "dinov2_small",
+      "r": 16,
+      "lora_alpha": 16.0,
+      "lora_dropout": 0.05
+    },
+    "fl": {
+      "setting": "S2",
+      "num_rounds": 20,
+      "local_epochs": 1,
+      "batch_size": 32,
+      "lr": 0.0003,
+      "lr_head": 0.001,
+      "lr_full": 3e-05,
+      "weight_decay": 0.01,
+      "clients": [
+        "derm",
+        "oct",
+        "cxr",
+        "brain"
+      ],
+      "smoke_samples_per_client": 12,
+      "max_train_samples_per_client": 6000,
+      "max_val_samples_per_client": 1500,
+      "amp": true,
+      "class_weighted_loss": true,
+      "gpu_augment": true,
+      "cache_in_memory": true,
+      "num_workers": 0,
+      "eval_num_workers": 0,
+      "sub_clients_per_modality": 3,
+      "dirichlet_alpha": 0.1
+    },
+    "variant": "local_only"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "amp_bf16": true,
+    "class_weighted_loss": true,
+    "gpu_augment": true
+  }
+}

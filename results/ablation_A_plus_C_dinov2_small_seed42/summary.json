@@ -1,0 +1,167 @@
+{
+  "experiment_name": "ablation_A_plus_C_dinov2_small_seed42",
+  "suite": "ablations",
+  "setting": "S1",
+  "dirichlet_alpha": null,
+  "method": "fedmedlora",
+  "seed": 42,
+  "backbone": "dinov2_small",
+  "rank": 16,
+  "num_rounds": 20,
+  "local_epochs": 1,
+  "clients": [
+    "derm",
+    "oct",
+    "histo",
+    "cxr",
+    "brain"
+  ],
+  "method_config": {
+    "use_domain_similarity": false,
+    "use_adaptive_rank": true,
+    "blend_alpha": 0.0,
+    "personalized_aggregate": false,
+    "rank_candidates": [
+      4,
+      8,
+      16
+    ],
+    "hetlora_ranks": null
+  },
+  "trainable_encoder_params_per_client": 294912,
+  "test_metrics": {
+    "derm": {
+      "accuracy": 0.784366576819407,
+      "balanced_accuracy": 0.7501892433807329,
+      "macro_f1": 0.7248297565725903,
+      "macro_auroc": 0.9673818862060214,
+      "ece": 0.052716911481718476,
+      "nll": 0.5465097085897089
+    },
+    "oct": {
+      "accuracy": 0.9032376747608536,
+      "balanced_accuracy": 0.923708981734491,
+      "macro_f1": 0.8797895281843305,
+      "macro_auroc": 0.990901503771851,
+      "ece": 0.0466103060630159,
+      "nll": 0.3113574243498025
+    },
+    "histo": {
+      "accuracy": 0.8326937835763623,
+      "balanced_accuracy": 0.8323531634687149,
+      "macro_f1": 0.8323017522316157,
+      "macro_auroc": 0.8894592768944439,
+      "ece": 0.13609110645761144,
+      "nll": 0.8766715444905862
+    },
+    "cxr": {
+      "accuracy": 0.9239766081871345,
+      "balanced_accuracy": 0.9456739229153659,
+      "macro_f1": 0.9088816420487243,
+      "macro_auroc": 0.9921382755293182,
+      "ece": 0.02394998742823015,
+      "nll": 0.22141138694110837
+    },
+    "brain": {
+      "accuracy": 0.9753086419753086,
+      "balanced_accuracy": 0.9754395698953571,
+      "macro_f1": 0.975453357588179,
+      "macro_auroc": 0.9982487296410567,
+      "ece": 0.0144929951525595,
+      "nll": 0.09852731481092529
+    }
+  },
+  "mean_test_accuracy": 0.8839166570638133,
+  "mean_test_balanced_acc": 0.8854729762789324,
+  "mean_test_macro_f1": 0.8642512073250881,
+  "mean_test_auroc": 0.9676259344085383,
+  "total_comm_bytes": 117350400,
+  "mean_upload_rank_final": {
+    "derm": 16.0,
+    "oct": 16.0,
+    "histo": 16.0,
+    "cxr": 16.0,
+    "brain": 16.0
+  },
+  "client_sizes": {
+    "derm": {
+      "train": 5999,
+      "val": 1483,
+      "test": 1484
+    },
+    "oct": {
+      "train": 6001,
+      "val": 1501,
+      "test": 10872
+    },
+    "histo": {
+      "train": 5794,
+      "val": 812,
+      "test": 1303
+    },
+    "cxr": {
+      "train": 3983,
+      "val": 855,
+      "test": 855
+    },
+    "brain": {
+      "train": 4907,
+      "val": 1053,
+      "test": 1053
+    }
+  },
+  "config": {
+    "experiment_name": "ablation_A_plus_C_dinov2_small_seed42",
+    "results_dir": "results",
+    "suite": "ablations",
+    "seed": 42,
+    "device": "auto",
+    "smoke": false,
+    "method": {
+      "name": "fedmedlora",
+      "use_domain_similarity": false,
+      "use_adaptive_rank": true
+    },
+    "model": {
+      "backbone": "dinov2_small",
+      "r": 16,
+      "lora_alpha": 16.0,
+      "lora_dropout": 0.05
+    },
+    "fl": {
+      "setting": "S1",
+      "num_rounds": 20,
+      "local_epochs": 1,
+      "batch_size": 32,
+      "lr": 0.001,
+      "lr_head": 0.001,
+      "lr_full": 3e-05,
+      "weight_decay": 0.01,
+      "clients": [
+        "derm",
+        "oct",
+        "histo",
+        "cxr",
+        "brain"
+      ],
+      "smoke_samples_per_client": 12,
+      "max_train_samples_per_client": 6000,
+      "max_val_samples_per_client": 1500,
+      "amp": true,
+      "class_weighted_loss": true,
+      "gpu_augment": true,
+      "cache_in_memory": true,
+      "num_workers": 0,
+      "eval_num_workers": 0
+    }
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "amp_bf16": true,
+    "class_weighted_loss": true,
+    "gpu_augment": true
+  }
+}

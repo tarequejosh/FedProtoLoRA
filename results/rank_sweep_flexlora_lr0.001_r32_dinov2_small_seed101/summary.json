@@ -1,0 +1,156 @@
+{
+  "experiment_name": "rank_sweep_flexlora_lr0.001_r32_dinov2_small_seed101",
+  "suite": "ranks_lr",
+  "setting": "S1",
+  "dirichlet_alpha": null,
+  "method": "flexlora",
+  "seed": 101,
+  "backbone": "dinov2_small",
+  "rank": 32,
+  "num_rounds": 20,
+  "local_epochs": 1,
+  "clients": [
+    "derm",
+    "oct",
+    "histo",
+    "cxr",
+    "brain"
+  ],
+  "method_config": {
+    "use_domain_similarity": false,
+    "use_adaptive_rank": false,
+    "blend_alpha": 0.0,
+    "personalized_aggregate": false,
+    "rank_candidates": null,
+    "hetlora_ranks": null
+  },
+  "trainable_encoder_params_per_client": 589824,
+  "test_metrics": {
+    "derm": {
+      "accuracy": 0.7735849056603774,
+      "balanced_accuracy": 0.7566776382436702,
+      "macro_f1": 0.6917951804091574,
+      "macro_auroc": 0.9629807173900291,
+      "ece": 0.0784236265602459,
+      "nll": 0.5987982726979901
+    },
+    "oct": {
+      "accuracy": 0.9002023546725534,
+      "balanced_accuracy": 0.9191985796289782,
+      "macro_f1": 0.8756355959305133,
+      "macro_auroc": 0.989448178649277,
+      "ece": 0.05428136715485915,
+      "nll": 0.35429603356234246
+    },
+    "histo": {
+      "accuracy": 0.8302752293577982,
+      "balanced_accuracy": 0.7555607069759027,
+      "macro_f1": 0.7755197333226135,
+      "macro_auroc": 0.9250336412877546,
+      "ece": 0.10085971557765926,
+      "nll": 0.44577377153538933
+    },
+    "cxr": {
+      "accuracy": 0.928654970760234,
+      "balanced_accuracy": 0.9502242755263755,
+      "macro_f1": 0.9144889256149566,
+      "macro_auroc": 0.9962149083088069,
+      "ece": 0.027757650788067405,
+      "nll": 0.19864435295850716
+    },
+    "brain": {
+      "accuracy": 0.9753086419753086,
+      "balanced_accuracy": 0.9755011322427052,
+      "macro_f1": 0.9756231268917552,
+      "macro_auroc": 0.9988155092390061,
+      "ece": 0.015529414753855027,
+      "nll": 0.09105236180669544
+    }
+  },
+  "mean_test_accuracy": 0.8816052204852542,
+  "mean_test_balanced_acc": 0.8714324665235264,
+  "mean_test_macro_f1": 0.8466125124337992,
+  "mean_test_auroc": 0.9744985909749747,
+  "total_comm_bytes": 235929600,
+  "mean_upload_rank_final": null,
+  "client_sizes": {
+    "derm": {
+      "train": 6000,
+      "val": 1484,
+      "test": 1484
+    },
+    "oct": {
+      "train": 6000,
+      "val": 1499,
+      "test": 10872
+    },
+    "histo": {
+      "train": 5554,
+      "val": 1047,
+      "test": 1308
+    },
+    "cxr": {
+      "train": 3984,
+      "val": 854,
+      "test": 855
+    },
+    "brain": {
+      "train": 4907,
+      "val": 1053,
+      "test": 1053
+    }
+  },
+  "config": {
+    "experiment_name": "rank_sweep_flexlora_lr0.001_r32_dinov2_small_seed101",
+    "results_dir": "results",
+    "suite": "ranks_lr",
+    "seed": 101,
+    "device": "auto",
+    "smoke": false,
+    "method": {
+      "name": "flexlora"
+    },
+    "model": {
+      "backbone": "dinov2_small",
+      "r": 32,
+      "lora_alpha": 16.0,
+      "lora_dropout": 0.05
+    },
+    "fl": {
+      "setting": "S1",
+      "num_rounds": 20,
+      "local_epochs": 1,
+      "batch_size": 32,
+      "lr": 0.001,
+      "lr_head": 0.001,
+      "lr_full": 3e-05,
+      "weight_decay": 0.01,
+      "clients": [
+        "derm",
+        "oct",
+        "histo",
+        "cxr",
+        "brain"
+      ],
+      "smoke_samples_per_client": 12,
+      "max_train_samples_per_client": 6000,
+      "max_val_samples_per_client": 1500,
+      "amp": true,
+      "class_weighted_loss": true,
+      "gpu_augment": true,
+      "cache_in_memory": true,
+      "num_workers": 0,
+      "eval_num_workers": 0
+    },
+    "variant": "flexlora_lr1e-3"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "amp_bf16": true,
+    "class_weighted_loss": true,
+    "gpu_augment": true
+  }
+}

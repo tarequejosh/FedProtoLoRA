@@ -1,0 +1,28 @@
+# Core Deep Learning
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0
+open_clip_torch>=2.20.0
+timm>=0.9.0
+
+# Scientific & ML Utilities
+pandas>=2.0.0
+scikit-learn>=1.2.0
+scipy>=1.10.0
+numpy>=1.24.0
+
+# Image & Deduplication
+Pillow>=9.5.0
+imagehash>=4.3.1
+PyWavelets>=1.4.0
+
+# Config, Logging & Reporting
+pyyaml>=6.0
+matplotlib>=3.7.0
+
+# Testing & Dev
+pytest>=7.3.0
+
+# Kaggle Integration
+kaggle>=1.5.13
+kagglehub>=0.2.0
