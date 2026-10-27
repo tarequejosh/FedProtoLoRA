@@ -184,7 +184,7 @@ class FederatedClient:
         """Extracts the LoRA update to upload.
 
         Default: the full local factors (A, B). With `adaptive_rank` = {"lora_alpha", "energy_tau",
-        "rank_candidates"} (FedMedLoRA component C), each layer instead uploads the round update
+        "rank_candidates"} (FedProtoLoRA component C), each layer instead uploads the round update
         delta = s * B A - (state downloaded at the start of the round), compressed by truncated SVD to
         the smallest candidate rank that keeps `energy_tau` of its spectral energy.
         """

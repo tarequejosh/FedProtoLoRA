@@ -1,4 +1,4 @@
-"""FedMedLoRA: Heterogeneity-Aware Federated Low-Rank Adaptation.
+"""FedProtoLoRA: Heterogeneity-Aware Federated Low-Rank Adaptation.
 
 Implements:
 - Component A: Product-space aggregation with truncated SVD re-projection.

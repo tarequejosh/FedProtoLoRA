@@ -22,13 +22,13 @@ describe the same model state. The test split is evaluated once, after the last 
 | `fedex_lora` | FedEx-LoRA (Singhal et al., ACL 2025) | A, B / averaged A, B + dense residual | Residual folded into the frozen weight makes the update exact. Residual bytes are counted. |
 | `flora` | FLoRA (Wang et al., NeurIPS 2024) | A, B / stacked factors (rank K·r) | Stacked update merged into base weights; adapters re-initialised (shared seed) each round. |
 | `hetlora` | HetLoRA (Cho et al., 2024) | rank-r_k A, B / truncated global | Client ranks cycle through {16, 8, 4} (≤ r) unless `client_ranks` is given. α_k = α·r_k/r_max so every client uses scaling α/r_max. Sparsity weights ∝ ‖B_k A_k‖_F per layer. The rank self-pruning of the paper is not implemented. |
-| `flexlora` | FlexLoRA (Bai et al., NeurIPS 2024) | A, B / SVD of Σ w_k s_k B_k A_k | Homogeneous ranks here, so FlexLoRA ≡ FedMedLoRA component A alone (`ablation_A_only`). |
+| `flexlora` | FlexLoRA (Bai et al., NeurIPS 2024) | A, B / SVD of Σ w_k s_k B_k A_k | Homogeneous ranks here, so FlexLoRA ≡ FedProtoLoRA component A alone (`ablation_A_only`). |
 | `fedmedlora` | Proposed | see below | |
 
-## FedMedLoRA components
+## FedProtoLoRA components
 
 * **A — product-space aggregation + truncated SVD.** Identical to FlexLoRA's aggregation step. This is
-  FlexLoRA's aggregation step; FedMedLoRA builds on it.
+  FlexLoRA's aggregation step; FedProtoLoRA builds on it.
 * **B — domain-similarity weighting.** Each client sends the mean CLS embedding of its non-augmented
   training images under the frozen backbone, computed once before training. Weights are
   `(1-β)·n_k/N + β·sim_k/Σ sim`, where sim is the clamped cosine similarity to the centroid (global
@@ -43,7 +43,7 @@ describe the same model state. The test split is evaluated once, after the last 
 * **Learning rates are tuned per method** on the validation split (seed 42, 10 rounds): `lr` ∈ {3e-4, 1e-3, 3e-3}
   for LoRA methods, `lr_full` ∈ {1e-5, 3e-5, 1e-4} for FedAvg-Full, `lr_head` ∈ {1e-3, 3e-3, 1e-2} for the linear probe.
   The criterion is mean validation balanced accuracy over the last 3 rounds (`scripts/select_hparams.py` writes
-  `configs/tuned_hparams.json`). The test split is never used for selection. Ablation, τ and rank variants inherit FedMedLoRA's
+  `configs/tuned_hparams.json`). The test split is never used for selection. Ablation, τ and rank variants inherit FedProtoLoRA's
   (or FlexLoRA's) rate.
 * **Equal budget:** 20 rounds × 1 local epoch, batch 32, rank 16, same backbone and LoRA targets.
   Every client is capped at 6,000 training / 1,500 validation images by a label-stratified subsample, identical for

@@ -125,7 +125,7 @@ def run_federated_simulation(config: Dict) -> Dict:
     head_hidden_dim = model_cfg.get("head_hidden_dim")
     backbone_name = model_cfg.get("backbone", "toy" if is_smoke else "dinov2_small")
 
-    # FedMedLoRA components (FlexLoRA = product-space SVD with plain sample-count weights, no B / C).
+    # FedProtoLoRA components (FlexLoRA = product-space SVD with plain sample-count weights, no B / C).
     is_fedmedlora = method_name == "fedmedlora"
     use_domain_similarity = is_fedmedlora and method_cfg.get("use_domain_similarity", True)
     use_adaptive_rank = is_fedmedlora and method_cfg.get("use_adaptive_rank", True)

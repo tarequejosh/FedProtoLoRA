@@ -1,4 +1,4 @@
-"""Figures of the FedMedLoRA paper, drawn from the run logs in results/.
+"""Figures of the FedProtoLoRA paper, drawn from the run logs in results/.
 
 Run from the repository root:  python analysis/make_figures.py [--out outputs/figures]
 Writes vector PDFs and 600-dpi PNGs. Every figure is drawn at its printed size (text width 6.48 in), and each
@@ -43,7 +43,7 @@ S1_NAMES = {
     "local_only": "Local-only LoRA", "centralized": "Centralized LoRA (pooled)", "fedavg_full": "FedAvg (full fine-tuning)",
     "fedavg_lora": "FedAvg-LoRA", "fedprox_lora": "FedProx-LoRA", "ffa_lora": "FFA-LoRA", "fedsa_lora": "FedSA-LoRA",
     "fedex_lora": "FedEx-LoRA", "flora": "FLoRA", "hetlora": "HetLoRA", "flexlora": "FlexLoRA",
-    "fedmedlora": "FedMedLoRA",
+    "fedmedlora": "FedProtoLoRA",
 }
 ETA_LO, ETA_HI = r"$\eta = 3{\times}10^{-4}$", r"$\eta = 10^{-3}$"
 
@@ -126,7 +126,7 @@ def fig_s1(df):
     bx = fig.add_subplot(gs[0, 1])
     pairs = {
         "FlexLoRA": (main[main.method == "flexlora"], lrc[lrc.method == "flexlora"], ORANGE, -0.06),
-        "FedMedLoRA": (lrc[lrc.method == "fedmedlora"], main[main.method == "fedmedlora"], BLUE, 0.06),
+        "FedProtoLoRA": (lrc[lrc.method == "fedmedlora"], main[main.method == "fedmedlora"], BLUE, 0.06),
     }
     for name, (lo_df, hi_df, colour, dx) in pairs.items():
         lo_s = lo_df.set_index("seed").mean_test_balanced_acc * 100
@@ -136,8 +136,8 @@ def fig_s1(df):
         bx.plot([0 + dx, 1 + dx], [lo_s.mean(), hi_s.mean()], color=colour, linewidth=1.8, zorder=3,
                 marker="o", markersize=4, markeredgecolor="white", markeredgewidth=0.6)
         bx.annotate(f"{name}\n{lo_s.mean():.1f} → {hi_s.mean():.1f}", (1 + dx, hi_s.mean()),
-                    xytext=(9, 7 if name == "FedMedLoRA" else -9), textcoords="offset points",
-                    va="center", ha="left", fontsize=6.5, color=colour if name == "FedMedLoRA" else "#c4521f")
+                    xytext=(9, 7 if name == "FedProtoLoRA" else -9), textcoords="offset points",
+                    va="center", ha="left", fontsize=6.5, color=colour if name == "FedProtoLoRA" else "#c4521f")
     bx.set_xticks([0, 1])
     bx.set_xticklabels([r"$3{\times}10^{-4}$", r"$10^{-3}$"])
     bx.set_xlim(-0.3, 1.95)
@@ -194,8 +194,8 @@ S2_ROWS = [  # key, label, colour, filled, marker
     ("flexlora", "FlexLoRA, " + ETA_LO, ORANGE, False, "o"),
     ("flexlora_lr1e-3", "FlexLoRA, " + ETA_HI, ORANGE, True, "o"),
     ("fedavg_lora", "FedAvg-LoRA", AQUA, True, "o"),
-    ("fedmedlora", "FedMedLoRA (global)", BLUE, False, "o"),
-    ("fedmedlora_personalized", "FedMedLoRA (personalized)", BLUE, True, "o"),
+    ("fedmedlora", "FedProtoLoRA (global)", BLUE, False, "o"),
+    ("fedmedlora_personalized", "FedProtoLoRA (personalized)", BLUE, True, "o"),
     ("oracle_modality", "Oracle: FlexLoRA within modality", ORACLE, True, "D"),
 ]
 
@@ -235,8 +235,8 @@ def fig_s2(df):
         # Bottom: per-seed gain of each method over learning-rate-matched FlexLoRA.
         bx = bot[j]
         ref = d[d.variant == "flexlora_lr1e-3"].set_index("seed").mean_test_balanced_acc
-        comps = [("fedavg_lora", "FedAvg-LoRA", AQUA, "o", True), ("fedmedlora", "FedMedLoRA (global)", BLUE, "o", False),
-                 ("fedmedlora_personalized", "FedMedLoRA (personalized)", BLUE, "o", True),
+        comps = [("fedavg_lora", "FedAvg-LoRA", AQUA, "o", True), ("fedmedlora", "FedProtoLoRA (global)", BLUE, "o", False),
+                 ("fedmedlora_personalized", "FedProtoLoRA (personalized)", BLUE, "o", True),
                  ("oracle_modality", "Oracle: FlexLoRA within modality", ORACLE, "D", True)]
         for i, (key, label, colour, marker, filled) in enumerate(comps):
             g = (d[d.variant == key].set_index("seed").mean_test_balanced_acc - ref).dropna() * 100
@@ -368,7 +368,7 @@ def fig_rank_convergence(df):
     fig = plt.figure(figsize=(TEXT_WIDTH, 3.45))
     gs = fig.add_gridspec(1, 2, width_ratios=[0.78, 1.4], wspace=0.28, left=0.075, right=0.985, top=0.91, bottom=0.42)
     ax = fig.add_subplot(gs[0, 0])
-    for d, colour, dx, name in ((flex, ORANGE, 1.05, "FlexLoRA"), (fed, BLUE, 0.95, "FedMedLoRA")):
+    for d, colour, dx, name in ((flex, ORANGE, 1.05, "FlexLoRA"), (fed, BLUE, 0.95, "FedProtoLoRA")):
         g = d.groupby("rank").mean_test_balanced_acc
         ranks = np.array(sorted(g.groups))
         assert all(len(g.get_group(r)) == 3 for r in ranks), "rank sweep must have three seeds per rank"
@@ -388,7 +388,7 @@ def fig_rank_convergence(df):
     ax.set_ylabel("Test balanced accuracy (%)")
     style(ax)
     panel(ax, "a", rf"LoRA rank (both {ETA_HI}, 3 seeds)", x=-0.02)
-    rank_handles = [Line2D([], [], color=BLUE, marker="o", markersize=4, linewidth=1.5, label="FedMedLoRA"),
+    rank_handles = [Line2D([], [], color=BLUE, marker="o", markersize=4, linewidth=1.5, label="FedProtoLoRA"),
                     Line2D([], [], color=ORANGE, marker="o", markersize=4, linewidth=1.5, label="FlexLoRA"),
                     Line2D([], [], color=MUTED, marker="o", markersize=2.5, linewidth=0, alpha=0.6, label="single seed")]
     ax.legend(handles=rank_handles, loc="upper center", bbox_to_anchor=(0.5, -0.27), ncol=2, frameon=False,
@@ -399,7 +399,7 @@ def fig_rank_convergence(df):
     for _, row in pd.concat([main, lrc.assign(method=lrc.method + "_lrc")]).iterrows():
         curves.setdefault(row.method, []).append([h["avg_val_balanced_acc"] * 100 for h in history(row.experiment_name)])
     highlight = [  # key, label, colour, linestyle, linewidth
-        ("fedmedlora", f"FedMedLoRA, {ETA_HI}", BLUE, "-", 1.7),
+        ("fedmedlora", f"FedProtoLoRA, {ETA_HI}", BLUE, "-", 1.7),
         ("flexlora_lrc", f"FlexLoRA, {ETA_HI}", ORANGE, "-", 1.5),
         ("flexlora", f"FlexLoRA, {ETA_LO}", ORANGE, (0, (3.5, 1.8)), 1.4),
         ("fedavg_lora", f"FedAvg-LoRA, {ETA_HI}", AQUA, "-", 1.4),

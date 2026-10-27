@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "FedMedLoRA Research Team"}
+    {name = "FedProtoLoRA Research Team"}
 ]
 dependencies = [
     "torch>=2.0.0",
@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/tarequejosh/FedMedLoRA"
+Repository = "https://github.com/tarequejosh/FedProtoLoRA"
 
 [project.optional-dependencies]
 dev = [

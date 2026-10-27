@@ -1,7 +1,7 @@
 """Generate publication LaTeX tables, statistics, and figures from real experimental runs.
 
 Statistics: mean ± 95% CI (t-distribution over seeds). Significance against the reference method
-(FlexLoRA by default — FedMedLoRA's direct parent) uses (i) a paired t-test over seeds on the
+(FlexLoRA by default — FedProtoLoRA's direct parent) uses (i) a paired t-test over seeds on the
 client-averaged metric and (ii) a Wilcoxon signed-rank test over (seed, client) pairs. With 3 seeds the
 seed-level test has little power; report both and prefer 5 seeds for the final paper.
 """
@@ -31,7 +31,7 @@ METHODS_DISPLAY_ORDER = [
     ("flora", "FLoRA"),
     ("hetlora", "HetLoRA"),
     ("flexlora", "FlexLoRA"),
-    ("fedmedlora", "\\textbf{FedMedLoRA (Ours)}"),
+    ("fedmedlora", "\\textbf{FedProtoLoRA (Ours)}"),
 ]
 def plain(name: str) -> str:
     """Strip a \\textbf{...} wrapper (and nothing else, so math such as $10^{-3}$ survives)."""
@@ -55,8 +55,8 @@ S2_DISPLAY_ORDER = [
     ("flexlora", "FlexLoRA"),
     ("flexlora_lr1e-3", "FlexLoRA, lr $10^{-3}$"),
     ("oracle_modality", "Oracle modality clustering"),
-    ("fedmedlora", "FedMedLoRA (global)"),
-    ("fedmedlora_personalized", "\\textbf{FedMedLoRA (personalized)}"),
+    ("fedmedlora", "FedProtoLoRA (global)"),
+    ("fedmedlora_personalized", "\\textbf{FedProtoLoRA (personalized)}"),
 ]
 
 # Validated categorical slots (dataviz reference palette, light mode); everything else is neutral gray.
@@ -182,7 +182,7 @@ def generate_per_client_table(df: pd.DataFrame, out_path: Path):
 def generate_significance_table(df: pd.DataFrame, out_path: Path, ours: str = "fedmedlora"):
     lines = [
         "\\begin{table}[t]", "\\centering", "\\small",
-        "\\caption{FedMedLoRA minus each method in test balanced accuracy (percentage points). $p_t$: paired t-test over seeds; "
+        "\\caption{FedProtoLoRA minus each method in test balanced accuracy (percentage points). $p_t$: paired t-test over seeds; "
         "$p_W$: Wilcoxon signed-rank over (seed, client) pairs; $p_W^{\\mathrm{Holm}}$: Holm-adjusted over all comparisons.}",
         "\\label{tab:significance}",
         "\\begin{tabular}{lccccc}", "\\toprule",
@@ -202,14 +202,14 @@ def generate_significance_table(df: pd.DataFrame, out_path: Path, ours: str = "f
     write_lines(lines, out_path)
 
 
-# Ablation rows that are main-suite runs (not re-run): A only == FlexLoRA, A+B+C == FedMedLoRA.
+# Ablation rows that are main-suite runs (not re-run): A only == FlexLoRA, A+B+C == FedProtoLoRA.
 ABLATION_FROM_MAIN = {"ablation_A_only": "flexlora", "ablation_full_A_B_C": "fedmedlora"}
 
 
 def generate_ablation_table(df: pd.DataFrame, out_path: Path, main_df: pd.DataFrame = None):
     lines = [
         "\\begin{table}[t]", "\\centering", "\\small",
-        "\\caption{Ablation of FedMedLoRA components (mean $\\pm$ 95\\% CI over seeds).}",
+        "\\caption{Ablation of FedProtoLoRA components (mean $\\pm$ 95\\% CI over seeds).}",
         "\\label{tab:ablations}",
         "\\begin{tabular}{lcccc}", "\\toprule",
         "\\textbf{Configuration} & \\textbf{Bal Acc (\\%)} & \\textbf{Macro-F1 (\\%)} & \\textbf{AUROC (\\%)} & \\textbf{Comm (MiB)} \\\\",
@@ -249,16 +249,16 @@ def generate_tau_table(tau_df: pd.DataFrame, main_df: pd.DataFrame, out_path: Pa
         if v.empty:
             continue
         rank = v["mean_upload_rank"].mean() if "mean_upload_rank" in v else float("nan")
-        lines.append(f"FedMedLoRA, $\\tau={tau:g}$ & {fmt(v['mean_test_balanced_acc'])} & {rank:.1f} & {v['total_comm_mb'].mean():.1f} \\\\")
+        lines.append(f"FedProtoLoRA, $\\tau={tau:g}$ & {fmt(v['mean_test_balanced_acc'])} & {rank:.1f} & {v['total_comm_mb'].mean():.1f} \\\\")
     lines += ["\\bottomrule", "\\end{tabular}", "\\end{table}"]
     write_lines(lines, out_path)
 
 
 def generate_s2_significance(df: pd.DataFrame, out_path: Path, ours: str = "fedmedlora_personalized"):
-    """S2: personalized FedMedLoRA minus each variant, per alpha (paired over seeds / (seed, sub-client) pairs)."""
+    """S2: personalized FedProtoLoRA minus each variant, per alpha (paired over seeds / (seed, sub-client) pairs)."""
     lines = [
         "\\begin{table}[t]", "\\centering", "\\small",
-        "\\caption{Setting S2: personalized FedMedLoRA minus each method in test balanced accuracy (percentage points). "
+        "\\caption{Setting S2: personalized FedProtoLoRA minus each method in test balanced accuracy (percentage points). "
         "$p_t$: paired t-test over seeds; $p_W$: Wilcoxon signed-rank over (seed, sub-client) pairs; "
         "$p_W^{\\mathrm{Holm}}$: Holm-adjusted over all S2 comparisons.}",
         "\\label{tab:s2_significance}",

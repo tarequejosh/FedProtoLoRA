@@ -1,10 +1,10 @@
 """Control experiments, run after scripts/run_pipeline.py.
 
-R1  lr_control   FlexLoRA at FedMedLoRA's learning rate (1e-3), S1, 5 seeds   -> method vs. learning-rate effect
+R1  lr_control   FlexLoRA at FedProtoLoRA's learning rate (1e-3), S1, 5 seeds   -> method vs. learning-rate effect
 R3  s2           FlexLoRA at 1e-3 in S2 (both alphas, 3 seeds)                 -> same question for S2
 R4  s2           Oracle modality clustering (FlexLoRA within each modality)    -> does similarity weighting beat known metadata?
-R2  lr_control   FedMedLoRA at FlexLoRA's tuned learning rate (3e-4), S1        -> robustness of the comparison to the LR
-R5  beta         personalized FedMedLoRA, S2 alpha=0.1, beta in {0.25,0.75,1}   -> sensitivity to the blend weight
+R2  lr_control   FedProtoLoRA at FlexLoRA's tuned learning rate (3e-4), S1        -> robustness of the comparison to the LR
+R5  beta         personalized FedProtoLoRA, S2 alpha=0.1, beta in {0.25,0.75,1}   -> sensitivity to the blend weight
 R6  backbone2    BiomedCLIP ViT-B/16: five key methods at a common LR, S1       -> second (medical) foundation model
 R7  ranks_lr     FlexLoRA rank sweep (4, 8, 32) at 1e-3, S1, 3 seeds             -> LR-matched rank comparison
 R8  s2           S2 seeds 7 and 1234 for all eight S2 variants                   -> S2 at five seeds, like S1

@@ -1,14 +1,14 @@
-# FedMedLoRA
+# FedProtoLoRA
 
 Code, data splits and run logs for
 
-> **FedMedLoRA: Similarity-aware federated low-rank adaptation of vision foundation models across heterogeneous
-> medical imaging modalities** (under review).
+> **FedProtoLoRA: Prototype-guided product-space low-rank adaptation of vision foundation models across
+> heterogeneous medical imaging datasets** (under review).
 
-FedMedLoRA is a federated LoRA method for institutions that image different organs with different modalities. Each
+FedProtoLoRA is a federated LoRA method for institutions that image different organs with different modalities. Each
 client fine-tunes LoRA adapters on a frozen vision foundation model (DINOv2 or BiomedCLIP) and keeps a private
 classification head. The server sums the client updates exactly in weight space, $\overline{\Delta W}=\sum_k w_k s_k B_k A_k$,
-and re-factorizes the sum by truncated SVD, as in FlexLoRA. FedMedLoRA chooses the weights from data volume and
+and re-factorizes the sum by truncated SVD, as in FlexLoRA. FedProtoLoRA chooses the weights from data volume and
 domain similarity:
 
 $$w_k^{(t)} = (1-\beta)\,\frac{n_k}{N} + \beta\,\frac{\mathrm{sim}_{k\to t}}{\sum_j \mathrm{sim}_{j\to t}},\qquad \beta = 0.5,$$
@@ -16,6 +16,9 @@ $$w_k^{(t)} = (1-\beta)\,\frac{n_k}{N} + \beta\,\frac{\mathrm{sim}_{k\to t}}{\su
 where $\mathrm{sim}_{k\to t}$ is the cosine similarity between the mean frozen embeddings of clients $k$ and $t$. Each
 client sends this 384-dimensional vector once, before training. The weights are either shared by all clients
 (global) or computed for each target client (personalized).
+
+FedProtoLoRA was developed under the working name FedMedLoRA. The code keeps that identifier: the Python package is
+`fedmedlora`, the method key is `fedmedlora`, and the run folders in `results/` are named `fedmedlora_…`.
 
 ## Contents
 
@@ -42,14 +45,14 @@ Run names have the form `<method>_<backbone>_seed<seed>`. Prefixes and infixes m
 Python 3.10 or newer. The exact versions used for the paper are pinned in `requirements-lock.txt` (PyTorch 2.11.0, CUDA 12.8).
 
 ```bash
-git clone https://github.com/tarequejosh/FedMedLoRA.git
-cd FedMedLoRA
+git clone https://github.com/tarequejosh/FedProtoLoRA.git
+cd FedProtoLoRA
 pip install -r requirements-lock.txt --extra-index-url https://download.pytorch.org/whl/cu128
 pip install -e .
 ```
 
 On Windows, some run folders exceed the default path-length limit; clone with
-`git clone -c core.longpaths=true https://github.com/tarequejosh/FedMedLoRA.git`.
+`git clone -c core.longpaths=true https://github.com/tarequejosh/FedProtoLoRA.git`.
 
 All commands below are run from the repository root.
 
@@ -59,7 +62,7 @@ No GPU or image data is needed; this takes under a minute.
 
 ```bash
 python analysis/make_tables.py     # LaTeX tables -> outputs/tables/; prints the statistics quoted in the paper
-python analysis/make_figures.py    # Figs. 2-5 as PDF and 600-dpi PNG -> outputs/figures/
+python analysis/make_figures.py    # Figs. 3-6 as PDF and 600-dpi PNG -> outputs/figures/
 ```
 
 ## Full reproduction
@@ -95,7 +98,7 @@ python scripts/run_controls.py         # matched learning rates, modality oracle
 ```
 
 Both runners skip runs that already have `results/<run>/summary.json`, so they can be stopped and restarted. Single
-stages are selected with `--stages`. One run with the paper's settings, for example FedMedLoRA in S1 with seed 42:
+stages are selected with `--stages`. One run with the paper's settings, for example FedProtoLoRA in S1 with seed 42:
 
 ```bash
 python scripts/run_all.py --suite main --methods fedmedlora --seeds 42
@@ -134,7 +137,7 @@ GPU kernels are not bit-identical across hardware.
 
 | Method | Key in `run_all.py` |
 |---|---|
-| FedMedLoRA, global / personalized | `fedmedlora` (`personalized_aggregate: true`) |
+| FedProtoLoRA, global / personalized | `fedmedlora` (`personalized_aggregate: true`) |
 | FlexLoRA | `flexlora` |
 | FedAvg-LoRA (FedIT) | `fedavg_lora` |
 | FedProx-LoRA | `fedprox_lora` |
@@ -149,7 +152,7 @@ GPU kernels are not bit-identical across hardware.
 
 ## Privacy
 
-Clients exchange LoRA adapters and, for FedMedLoRA, one mean embedding per client. No images leave a client, but
+Clients exchange LoRA adapters and, for FedProtoLoRA, one mean embedding per client. No images leave a client, but
 neither the adapters nor the embedding carry a formal privacy guarantee.
 
 ## Citation

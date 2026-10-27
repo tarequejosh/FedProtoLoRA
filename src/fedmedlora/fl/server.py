@@ -29,7 +29,7 @@ NO_AGGREGATION_METHODS = ("local_only", "linear_probe")
 
 
 class FederatedServer:
-    """Central federated coordinator for FedMedLoRA and all PEFT baselines.
+    """Central federated coordinator for FedProtoLoRA and all PEFT baselines.
 
     `aggregate` returns a per-client download dict {client_id: LoRA state}. For non-personalised
     methods every client receives the same object.
@@ -149,7 +149,7 @@ class FederatedServer:
         sample_counts: Dict[str, int],
         domain_embeddings: Optional[Dict[str, torch.Tensor]],
     ) -> Dict[str, LoRAState]:
-        """FedMedLoRA / FlexLoRA: dense weighted sum of client Delta W_k, then truncated SVD to target rank.
+        """FedProtoLoRA / FlexLoRA: dense weighted sum of client Delta W_k, then truncated SVD to target rank.
 
         Uploads flagged `is_delta` (component C) are reconstructed as Delta W_k = ref_k + s_k B_k A_k,
         where ref_k is the dense update the server last sent to client k.

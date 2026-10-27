@@ -1,4 +1,4 @@
-"""Download medical imaging datasets for FedMedLoRA using kagglehub.
+"""Download medical imaging datasets for FedProtoLoRA using kagglehub.
 
 Supports idempotent downloads, progress tracking, and symlinking/copying into data/raw/<client>.
 """
@@ -71,7 +71,7 @@ def download_dataset(client_name: str, raw_dir: Path, force: bool = False) -> Pa
     return dest_dir
 
 def main():
-    parser = argparse.ArgumentParser(description="Download datasets for FedMedLoRA")
+    parser = argparse.ArgumentParser(description="Download datasets for FedProtoLoRA")
     parser.add_argument("--clients", nargs="+", default=["brain", "cxr", "derm", "histo", "oct"],
                         help="List of clients to download")
     parser.add_argument("--raw_dir", type=str, default="data/raw", help="Target raw directory")

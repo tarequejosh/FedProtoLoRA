@@ -1,4 +1,4 @@
-"""Federated aggregation methods and baselines for FedMedLoRA."""
+"""Federated aggregation methods and baselines for FedProtoLoRA."""
 
 from .fedmedlora import (
     aggregate_product_space_svd,

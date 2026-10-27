@@ -10,7 +10,7 @@ from fedmedlora.fl.simulator import run_federated_simulation
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run FedMedLoRA experiment")
+    parser = argparse.ArgumentParser(description="Run FedProtoLoRA experiment")
     parser.add_argument("--config", type=str, required=True, help="Path to experiment YAML config")
     parser.add_argument("--smoke", action="store_true", help="Run fast smoke test mode")
     parser.add_argument("--seed", type=int, default=None, help="Override random seed")

@@ -7,7 +7,7 @@ Stages (the control experiments follow in scripts/run_controls.py):
   4. s2_a0.5       three label-skewed institutions per modality, Dirichlet alpha=0.5, 6 variants x 3 seeds
   5. tau           adaptive-rank energy threshold 0.8 / 0.9 x 3 seeds          (0.95 = main)
   6. s2_a0.1       stronger skew, 6 variants x 3 seeds
-  7. ranks         FedMedLoRA & FlexLoRA at r = 4 / 8 / 32 x 3 seeds           (16 = main)
+  7. ranks         FedProtoLoRA & FlexLoRA at r = 4 / 8 / 32 x 3 seeds           (16 = main)
   8. main_extra    seeds 7 and 1234 for all 13 methods (5 seeds in total)
 Every run is resumable (finished runs are skipped), failures are logged to results/failed_runs.log and skipped.
 
@@ -70,7 +70,7 @@ def make_report(results_dir: Path, smoke: bool, log_file: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run the full FedMedLoRA experiment pipeline")
+    parser = argparse.ArgumentParser(description="Run the full FedProtoLoRA experiment pipeline")
     parser.add_argument("--stages", nargs="+", default=STAGES, choices=STAGES)
     parser.add_argument("--backbone", default="dinov2_small")
     parser.add_argument("--smoke", action="store_true", help="Toy-backbone dry run into results_smoke/")

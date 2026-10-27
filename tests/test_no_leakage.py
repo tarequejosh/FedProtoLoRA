@@ -1,4 +1,4 @@
-"""Automated data leakage tests for FedMedLoRA.
+"""Automated data leakage tests for FedProtoLoRA.
 
 Validates that:
 1. No patient / subject / lesion group ID appears in more than one split (train, val, test) within a client.

@@ -32,3 +32,7 @@ docs/*
 Thumbs.db
 .vscode/
 .idea/
+
+# Word files and lock files (the manuscript lives outside the repository)
+*.docx
+~$*

@@ -1,9 +1,9 @@
-"""Resumable runner for the FedMedLoRA experiment grid.
+"""Resumable runner for the FedProtoLoRA experiment grid.
 
 Compute budget (identical for every method): 20 rounds x 1 local epoch, label-stratified caps of 6,000 train /
 1,500 val images per client, bf16, batch 32. Suites are ordered seed-major so that a partially finished grid
 still yields complete tables with fewer seeds. Redundant runs are not repeated: ablation "A only" is FlexLoRA and
-"A+B+C" is FedMedLoRA from the main suite; the rank sweep and tau sweep reuse r=16 / tau=0.95 from main.
+"A+B+C" is FedProtoLoRA from the main suite; the rank sweep and tau sweep reuse r=16 / tau=0.95 from main.
 
 Recommended: python scripts/run_pipeline.py, then python scripts/run_controls.py
 Single suites: python scripts/run_all.py --suite {tune,main,ablations,s2,tau,ranks}
@@ -61,7 +61,7 @@ S2_METHODS = {
     "local_only": {},
 }
 
-TAU_VALUES = [0.8, 0.9]          # 0.95 = main-suite FedMedLoRA
+TAU_VALUES = [0.8, 0.9]          # 0.95 = main-suite FedProtoLoRA
 SWEEP_RANKS = [4, 8, 32]         # 16 = main suite
 
 # Learning-rate grids searched on the validation split (seed 42, 10 rounds).
@@ -241,7 +241,7 @@ def suite_ranks(seeds, backbone="dinov2_small", smoke=False, force=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run FedMedLoRA experimental suites")
+    parser = argparse.ArgumentParser(description="Run FedProtoLoRA experimental suites")
     parser.add_argument("--suite", type=str, default="main", choices=["tune", "main", "ablations", "s2", "tau", "ranks"])
     parser.add_argument("--seeds", nargs="+", type=int, default=MAIN_SEEDS)
     parser.add_argument("--backbone", type=str, default="dinov2_small")

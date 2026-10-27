@@ -1,4 +1,4 @@
-"""Patient and subject-grouped leakage-safe dataset splitting for FedMedLoRA."""
+"""Patient and subject-grouped leakage-safe dataset splitting for FedProtoLoRA."""
 
 import re
 import warnings

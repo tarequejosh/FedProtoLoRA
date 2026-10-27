@@ -1,4 +1,4 @@
-"""Model definitions, LoRA layers, and heads for FedMedLoRA."""
+"""Model definitions, LoRA layers, and heads for FedProtoLoRA."""
 
 from .lora import (
     LoRALinear,
