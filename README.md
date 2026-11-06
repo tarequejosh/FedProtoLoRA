@@ -62,7 +62,7 @@ No GPU or image data is needed; this takes under a minute.
 
 ```bash
 python analysis/make_tables.py     # LaTeX tables -> outputs/tables/; prints the statistics quoted in the paper
-python analysis/make_figures.py    # Figs. 3-6 as PDF and 600-dpi PNG -> outputs/figures/
+python analysis/make_figures.py    # Figs. 3-5 and S1 as PDF and 600-dpi PNG -> outputs/figures/
 ```
 
 ## Full reproduction

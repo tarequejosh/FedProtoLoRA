@@ -251,7 +251,7 @@ def table_s2(s2):
     head = " & ".join(f"\\multicolumn{{3}}{{c}}{{$\\alpha={a:g}$}}" for a in alphas)
     lines = [
         "\\begin{table*}[t]", "\\centering", "\\small",
-        f"\\caption{{Setting S2 (three simulated label-skewed, group-disjoint sub-clients per modality; 12 clients): "
+        f"\\caption{{Setting S2 (three simulated label-skewed, group-disjoint sub-clients for each of four modalities, breast histopathology excluded; 12 clients): "
         f"test balanced accuracy (\\%), mean {{\\scriptsize$\\pm$95\\% CI}} over {n_seeds} independent seeds. Smaller "
         "Dirichlet $\\alpha$ = stronger label skew. $\\Delta$: paired seed-level difference (personalized FedProtoLoRA "
         f"minus method, percentage points, mean {{\\scriptsize$\\pm$95\\% CI}} over {n_seeds} seeds); $p_t$ "
