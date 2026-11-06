@@ -15,10 +15,17 @@ import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
 from matplotlib.ticker import FixedLocator, NullFormatter
+from scipy import stats
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-from make_report import ci95  # noqa: E402
+
+
+def ci95(values) -> float:
+    v = np.asarray(values, dtype=float)
+    v = v[~np.isnan(v)]
+    if len(v) < 2:
+        return float("nan")
+    return float(stats.t.ppf(0.975, len(v) - 1) * v.std(ddof=1) / np.sqrt(len(v)))
 
 RES = ROOT / "results"
 OUT = ROOT / "outputs" / "figures"

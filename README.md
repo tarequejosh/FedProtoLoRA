@@ -3,19 +3,25 @@
 Code, data splits and run logs for
 
 > **FedProtoLoRA: Prototype-guided product-space low-rank adaptation of vision foundation models across
-> heterogeneous medical imaging datasets** (under review).
+> heterogeneous medical imaging datasets**
+>
+> Md. Tareque Jamil Josh, Md. Aminur Rahman Joy, Md. Minhazur Rahman Mim, Md. Al Mahmud, Md Mahmudul Hasan Moon, and Md. Assaduzzaman
 
-FedProtoLoRA is a federated LoRA method for institutions that image different organs with different modalities. Each
-client fine-tunes LoRA adapters on a frozen vision foundation model (DINOv2 or BiomedCLIP) and keeps a private
-classification head. The server sums the client updates exactly in weight space, $\overline{\Delta W}=\sum_k w_k s_k B_k A_k$,
-and re-factorizes the sum by truncated SVD, as in FlexLoRA. FedProtoLoRA chooses the weights from data volume and
-domain similarity:
+FedProtoLoRA studies whether lightweight, unlabelled visual representations can guide federated LoRA aggregation
+across heterogeneous medical imaging datasets. Each client fine-tunes LoRA adapters on a frozen vision foundation
+model (DINOv2 or BiomedCLIP) and keeps a private classification head. The server reuses FlexLoRA's exact
+product-space aggregation unchanged—summing the dense client updates $\overline{\Delta W}=\sum_k w_k s_k B_k A_k$
+and re-factorizing the sum by truncated SVD—and modifies only the aggregation weights by blending sample counts with
+frozen-embedding cosine similarity:
 
 $$w_k^{(t)} = (1-\beta)\,\frac{n_k}{N} + \beta\,\frac{\mathrm{sim}_{k\to t}}{\sum_j \mathrm{sim}_{j\to t}},\qquad \beta = 0.5,$$
 
-where $\mathrm{sim}_{k\to t}$ is the cosine similarity between the mean frozen embeddings of clients $k$ and $t$. Each
-client sends this 384-dimensional vector once, before training. The weights are either shared by all clients
-(global) or computed for each target client (personalized).
+where $\mathrm{sim}_{k\to t}$ is the rectified cosine similarity between the one-shot unlabelled mean frozen embeddings
+(client centroids / prototypes) of clients $k$ and $t$. Each client sends this 384-dimensional vector once before
+round 1. The weights are either shared by all clients (global) or computed for each target client (personalized).
+Two federation regimes are evaluated across five leakage-audited public datasets:
+- **Setting S1:** 5 clients, one per imaging modality (dermoscopy, retinal OCT, breast histopathology, chest X-ray, brain MRI).
+- **Setting S2:** 12 simulated Dirichlet label-skewed sub-clients ($\alpha \in \{0.5, 0.1\}$), three for each of four modalities (breast histopathology excluded due to small patient count).
 
 FedProtoLoRA was developed under the working name FedMedLoRA. The code keeps that identifier: the Python package is
 `fedmedlora`, the method key is `fedmedlora`, and the run folders in `results/` are named `fedmedlora_…`.
@@ -157,7 +163,13 @@ neither the adapters nor the embedding carry a formal privacy guarantee.
 
 ## Citation
 
-The citation will be added when the paper is published.
+```bibtex
+@article{josh2026fedprotolora,
+  title   = {FedProtoLoRA: Prototype-guided product-space low-rank adaptation of vision foundation models across heterogeneous medical imaging datasets},
+  author  = {Josh, Md. Tareque Jamil and Joy, Md. Aminur Rahman and Mim, Md. Minhazur Rahman and Mahmud, Md. Al and Moon, Md Mahmudul Hasan and Assaduzzaman, Md.},
+  year    = {2026}
+}
+```
 
 ## License
 

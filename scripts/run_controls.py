@@ -8,7 +8,6 @@ R5  beta         personalized FedProtoLoRA, S2 alpha=0.1, beta in {0.25,0.75,1} 
 R6  backbone2    BiomedCLIP ViT-B/16: five key methods at a common LR, S1       -> second (medical) foundation model
 R7  ranks_lr     FlexLoRA rank sweep (4, 8, 32) at 1e-3, S1, 3 seeds             -> LR-matched rank comparison
 R8  s2           S2 seeds 7 and 1234 for all eight S2 variants                   -> S2 at five seeds, like S1
-                 (decided on 2026-10-26, before any of these runs; all five seeds are reported)
 
 Same resumable / failure-tolerant / keep-awake behaviour as run_pipeline.py.
 Usage: python scripts/run_controls.py [--stages R1 R3 ...]
@@ -22,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import run_all  # noqa: E402
 from run_all import build_config, execute_grid_run, load_tuned  # noqa: E402
-from run_pipeline import keep_awake, log, make_report, snapshot_code  # noqa: E402
+from run_pipeline import keep_awake, log, refresh_summary, snapshot_code  # noqa: E402
 
 STAGES = ["R1", "R3", "R4", "R2", "R5", "R6", "R7", "R8"]
 S2_EXTRA_SEEDS = run_all.EXTRA_SEEDS
@@ -124,7 +123,7 @@ def main():
                         seeds=S2_EXTRA_SEEDS)
                 run_all.suite_s2(S2_EXTRA_SEEDS, backbone=backbone, smoke=args.smoke)
             log(f"stage {stage} finished in {(time.time() - t0) / 3600:.2f} h (elapsed {(time.time() - t_start) / 3600:.2f} h)", log_file)
-            make_report(results_dir, args.smoke, log_file)
+            refresh_summary(results_dir, log_file)
         log(f"controls finished in {(time.time() - t_start) / 3600:.2f} h", log_file)
     finally:
         keep_awake(False)

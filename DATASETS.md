@@ -61,8 +61,8 @@ in more than one split.
 
 ## Setting S2
 
-Each modality except histopathology is split into three institutions by whole patient groups, with Dirichlet(α)
-label proportions (α ∈ {0.1, 0.5}). An institution's training, validation and test data follow the same skewed
-distribution. Histopathology is excluded because its 70 patients cannot form three institutions with usable
+Each modality except histopathology is split into three simulated sub-clients by whole patient groups, with Dirichlet(α)
+label proportions (α ∈ {0.1, 0.5}). A sub-client's training, validation and test data follow the same skewed
+distribution. Histopathology is excluded because its 70 patients cannot form three sub-clients with usable
 validation and test sets. The partition is computed at run time from the split manifests and the seed
 (`src/fedmedlora/data/partition.py`).

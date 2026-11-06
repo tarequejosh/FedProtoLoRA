@@ -1,6 +1,6 @@
 """Pre-decode every processed image once into a shared on-disk uint8 tensor cache (N, 3, 224, 224) per client.
 
-All ~150 experiment runs then read memory-mapped tensors instead of decoding JPEGs (identical pixels to the
+All 260 experiment runs then read memory-mapped tensors instead of decoding JPEGs (identical pixels to the
 in-memory cache: same file, same bilinear resize). Output: data/tensor_cache/<client>_224.npy plus
 <client>_224_index.csv mapping image_path -> row.
 """

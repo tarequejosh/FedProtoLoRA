@@ -56,10 +56,10 @@ describe the same model state. The test split is evaluated once, after the last 
 ## Settings
 
 * **S1** — one client per modality (5 clients).
-* **S2** — each modality (except histopathology) is split into 3 institutions by whole patient groups, with Dirichlet(α)
-  label skew (α ∈ {0.1, 0.5}). The same per-class proportions apply to an institution's train, val and test, so each institution is
+* **S2** — each modality (except histopathology) is split into 3 simulated sub-clients by whole patient groups, with Dirichlet(α)
+  label skew (α ∈ {0.1, 0.5}). The same per-class proportions apply to a sub-client's train, val and test, so each sub-client is
   evaluated on its own label distribution (`fl.setting: S2`, `src/fedmedlora/data/partition.py`). S2 tests whether
-  similarity weighting helps when several institutions share a modality.
+  similarity weighting helps when several simulated label-skewed sub-clients share a modality.
 
 Not implemented: covariance-based domain distances, partial client participation, and learning-rate schedules
 (constant learning rate, full participation in every round).

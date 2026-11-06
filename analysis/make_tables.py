@@ -16,8 +16,27 @@ import pandas as pd
 from scipy import stats
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-from make_report import ci95, holm, paired_tests  # noqa: E402
+
+
+def ci95(values) -> float:
+    v = np.asarray(values, dtype=float)
+    v = v[~np.isnan(v)]
+    if len(v) < 2:
+        return float("nan")
+    return float(stats.t.ppf(0.975, len(v) - 1) * v.std(ddof=1) / np.sqrt(len(v)))
+
+
+def holm(pvalues):
+    """Holm-Bonferroni adjusted p-values (family-wise error control; NaNs are left as NaN)."""
+    p = np.asarray(pvalues, dtype=float)
+    adj = np.full_like(p, np.nan)
+    ok = np.where(~np.isnan(p))[0]
+    order = ok[np.argsort(p[ok])]
+    m, running = len(order), 0.0
+    for rank, idx in enumerate(order):
+        running = max(running, min(1.0, (m - rank) * p[idx]))
+        adj[idx] = running
+    return adj
 
 OUT = ROOT / "outputs" / "tables"
 OURS = "fedmedlora"

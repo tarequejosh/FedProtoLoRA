@@ -1,10 +1,10 @@
-"""Main experiment pipeline: every stage in order, with a quick-look report (reports/) after each stage.
+"""Main experiment pipeline: every stage in order, with summary.csv refreshed after each stage.
 
 Stages (the control experiments follow in scripts/run_controls.py):
   1. tune          per-method learning rate on validation (seed 42, 10 rounds)  -> configs/tuned_hparams.json
   2. main          13 methods x seeds 42/101/2024                               (Table: main, per-client, significance)
   3. ablations     A+B, A+C, personalized x 3 seeds                             (A-only / A+B+C reuse main runs)
-  4. s2_a0.5       three label-skewed institutions per modality, Dirichlet alpha=0.5, 6 variants x 3 seeds
+  4. s2_a0.5       three simulated label-skewed sub-clients per modality, Dirichlet alpha=0.5, 6 variants x 3 seeds
   5. tau           adaptive-rank energy threshold 0.8 / 0.9 x 3 seeds          (0.95 = main)
   6. s2_a0.1       stronger skew, 6 variants x 3 seeds
   7. ranks         FedProtoLoRA & FlexLoRA at r = 4 / 8 / 32 x 3 seeds           (16 = main)
@@ -58,15 +58,10 @@ def snapshot_code(results_dir: Path):
     return dest
 
 
-def make_report(results_dir: Path, smoke: bool, log_file: Path):
-    import subprocess
+def refresh_summary(results_dir: Path, log_file: Path):
     df = aggregate_experiment_results(results_dir)
-    if df.empty:
-        return
-    out = "reports_smoke" if smoke else "reports"
-    res = subprocess.run([sys.executable, "scripts/make_report.py", "--summary_csv", str(results_dir / "summary.csv"),
-                          "--results_dir", str(results_dir), "--output_dir", out], capture_output=True, text=True)
-    log(f"report regenerated in {out}/ (exit {res.returncode}, {len(df)} runs)", log_file)
+    if not df.empty:
+        log(f"summary.csv updated ({len(df)} runs)", log_file)
 
 
 def main():
@@ -115,7 +110,7 @@ def main():
                     run_all.suite_main(run_all.EXTRA_SEEDS, **common)
             log(f"stage '{stage}' finished in {(time.time() - t0) / 3600:.2f} h "
                 f"(elapsed {(time.time() - t_start) / 3600:.2f} h)", log_file)
-            make_report(results_dir, args.smoke, log_file)
+            refresh_summary(results_dir, log_file)
 
         failed = results_dir / "failed_runs.log"
         n_failed = failed.read_text().count("=== ") if failed.exists() else 0

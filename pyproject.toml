@@ -5,12 +5,17 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "fedmedlora"
 version = "0.1.0"
-description = "Similarity-aware federated low-rank adaptation of vision foundation models across heterogeneous medical imaging modalities"
+description = "Prototype-guided product-space low-rank adaptation of vision foundation models across heterogeneous medical imaging datasets"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "FedProtoLoRA Research Team"}
+    {name = "Md. Tareque Jamil Josh"},
+    {name = "Md. Aminur Rahman Joy"},
+    {name = "Md. Minhazur Rahman Mim"},
+    {name = "Md. Al Mahmud"},
+    {name = "Md Mahmudul Hasan Moon"},
+    {name = "Md. Assaduzzaman"}
 ]
 dependencies = [
     "torch>=2.0.0",
